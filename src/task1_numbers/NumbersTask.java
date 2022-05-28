@@ -1,7 +1,6 @@
 package task1_numbers;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class NumbersTask {
 
@@ -33,16 +32,20 @@ public class NumbersTask {
      * Add össze a fájlból beolvasott számokat!
      */
     public int sum() {
-        // TODO
-        return -1;
+        List<Integer> numbers = dataHandler.getNumbers();
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 
     /**
      * Mekkora a fájlból beolvasott számok átlaga? Számítsd ki!
      */
     public double avg() {
-        // TODO
-        return 0.0;
+        List<Integer> numbers = dataHandler.getNumbers();
+        return (double) sum() / numbers.size();
     }
 
     /**
@@ -50,8 +53,21 @@ public class NumbersTask {
      * Számold össze, és térj vissza a megoldással!
      */
     public int countDifferentDigits(int index) {
-        // TODO
-        return -1;
+        List<Integer> numbers = dataHandler.getNumbers();
+        int num = numbers.get(index);
+        Set<Integer> digits = new HashSet<>();
+        if (num < 0) {
+            num = Math.abs(num);
+        }
+        if (num != 0) {
+            while (num > 0) {
+                digits.add(num % 10);
+                num = num / 10;
+            }
+        } else {
+            return 1;
+        }
+        return digits.size();
     }
 
     /**
@@ -59,8 +75,26 @@ public class NumbersTask {
      * Számold össze, és térj vissza a megoldással!
      */
     public int countDigit(int digit) {
-        // TODO
-        return -1;
+
+        List<Integer> numbers = dataHandler.getNumbers();
+        String digitAsString = Integer.toString(digit);
+        int counter = 0;
+        for (Integer number : numbers) {
+            if (number < 0) {
+                number = Math.abs(number);
+            }
+            String num = number.toString();
+            int[] xs = new int[num.length()];
+            for (int i = 0; i < xs.length; i++) {
+                xs[i] = Integer.parseInt(String.valueOf(num.charAt(i)));
+            }
+            for (int x : xs) {
+                if (x == digit) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 
     /**
@@ -68,8 +102,40 @@ public class NumbersTask {
      * Számold össze, és térj vissza a megoldással!
      */
     public Map<Integer, Integer> countAllDigits() {
-        // TODO
-        return null;
+        List<Integer> numbers = dataHandler.getNumbers();
+        Map<Integer, Integer> counterMap = new HashMap<>();
+        counterMap.put(0, 0);
+        counterMap.put(1, 0);
+        counterMap.put(2, 0);
+        counterMap.put(3, 0);
+        counterMap.put(4, 0);
+        counterMap.put(5, 0);
+        counterMap.put(6, 0);
+        counterMap.put(7, 0);
+        counterMap.put(8, 0);
+        counterMap.put(9, 0);
+        int counter = 0;
+        for (int j = 0; j <= 10; j++) {
+            for (Integer number : numbers) {
+                if (number < 0) {
+                    number = Math.abs(number);
+                }
+                String num = number.toString();
+                int[] xs = new int[num.length()];
+                for (int i = 0; i < xs.length; i++) {
+                    xs[i] = Integer.parseInt(String.valueOf(num.charAt(i)));
+                }
+                for (int x : xs) {
+                    if (x == j) {
+                        counter++;
+                    }
+                }
+            }
+            counterMap.put(j, counter);
+            counter = 0;
+        }
+
+        return counterMap;
     }
 
 }

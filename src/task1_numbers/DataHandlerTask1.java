@@ -1,5 +1,8 @@
 package task1_numbers;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +35,12 @@ public class DataHandlerTask1 {
 
     public void loadFromFile() {
         try {
-            // TODO
+            BufferedReader br = new BufferedReader(
+                    new FileReader("C:\\Users\\bence\\IdeaProjects\\OOPTasks\\src\\task1_numbers\\numbers.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                numbers.add(Integer.parseInt(line));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
