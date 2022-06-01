@@ -1,5 +1,7 @@
 package task4_pizzas;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,14 @@ public class DataHandlerTask4 {
 
     public void loadData() {
         try {
-            // TODO
+            BufferedReader br = new BufferedReader(
+                    new FileReader("C:\\Users\\bence\\IdeaProjects\\OOPTasks\\src\\task4_pizzas\\pizzas.txt"));
+            String line;
+            while ((line = br.readLine()) != null){
+                Pizza pizza = new Pizza(line);
+                pizzas.add(pizza);
+            }
+            br.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

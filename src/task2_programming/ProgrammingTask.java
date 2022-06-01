@@ -1,5 +1,6 @@
 package task2_programming;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +32,17 @@ public class ProgrammingTask {
      * (Megjegyzés: nincs holtverseny.)
      */
     public int findYearWithMaxLanguages() {
-        // TODO
-        return -1;
+        Map<Integer, List<String>> languages = dataHandler.getLanguages();
+        int result = 0;
+        int max = Integer.MIN_VALUE;
+        for (Map.Entry<Integer,List<String>> entry : languages.entrySet()){
+            int num = entry.getValue().size();
+            if (num>max){
+                max = num;
+                result = entry.getKey();
+            }
+        }
+            return result;
     }
 
     /**
@@ -48,7 +58,14 @@ public class ProgrammingTask {
      *
      */
     public int findLanguageYear(String languageName) {
-        // TODO
+        Map<Integer, List<String>> languages = dataHandler.getLanguages();
+        for (Map.Entry<Integer,List<String>> entry : languages.entrySet()){
+            for (String x : entry.getValue()){
+                if (x.equals(languageName)){
+                    return entry.getKey();
+                }
+            }
+        }
         return -1;
     }
 
@@ -65,8 +82,16 @@ public class ProgrammingTask {
      * Ha nincs olyan programozási nyelv, akkor a metódus üres (0 hosszúságú) listával térjen vissza.
      */
     public List<String> searchForLanguages(String searchFor) {
-        // TODO
-        return null;
+        List<String> list = new ArrayList<>();
+        Map<Integer, List<String>> languages = dataHandler.getLanguages();
+        for (Map.Entry<Integer,List<String>> entry : languages.entrySet()){
+            for (String x : entry.getValue()){
+                if (x.toLowerCase().contains(searchFor.toLowerCase())){
+                    list.add(x);
+                }
+            }
+        }
+        return list;
     }
 
     /**
@@ -76,8 +101,16 @@ public class ProgrammingTask {
      * @return 13
      */
     public int countLanguagesWithOneLetterName() {
-        // TODO
-        return -1;
+        int counter = 0;
+        Map<Integer, List<String>> languages = dataHandler.getLanguages();
+        for (Map.Entry<Integer,List<String>> entry : languages.entrySet()){
+            for (String x : entry.getValue()){
+                if (x.length() == 1){
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 
     /**
@@ -87,8 +120,18 @@ public class ProgrammingTask {
      * @return Allgemeiner Berichts Aufbereitungs Prozessor
      */
     public String findLongestNamedLanguage() {
-        // TODO
-        return null;
+        int max = Integer.MIN_VALUE;
+        String result = "";
+        Map<Integer, List<String>> languages = dataHandler.getLanguages();
+        for (Map.Entry<Integer,List<String>> entry : languages.entrySet()){
+            for (String x : entry.getValue()){
+                if (x.length() > max){
+                    max = x.length();
+                    result = x;
+                }
+            }
+        }
+        return result;
     }
 
 }

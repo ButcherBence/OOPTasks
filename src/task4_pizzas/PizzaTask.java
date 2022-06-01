@@ -1,5 +1,6 @@
 package task4_pizzas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PizzaTask {
@@ -31,16 +32,30 @@ public class PizzaTask {
      * és térj vissza az eredménnyel!
      */
     public int sumPreparationTime(String... pizzaNames) {
-        // TODO
-        return -1;
+        int sum = 0;
+        List<Pizza> pizzas = dataHandler.getPizzas();
+        for (Pizza pizza : pizzas){
+         for (String pizzaName : pizzaNames){
+             if (pizza.getName().equalsIgnoreCase(pizzaName)){
+                 sum += pizza.getPreparationTime();
+             }
+         }
+        }
+        return sum;
     }
 
     /**
      * Gyűjtsd össze azokat a pizzákat, amelyek rendelhetőek az adott méretben!
      */
     public List<Pizza> findPizzasBySize(PizzaSize size) {
-        // TODO
-        return null;
+        List<Pizza> pizzas = dataHandler.getPizzas();
+        List<Pizza> pizzaBySize = new ArrayList<>();
+        for (Pizza pizza : pizzas){
+            if (pizza.getPizzaSize().equals(size)){
+                pizzaBySize.add(pizza);
+            }
+        }
+        return pizzaBySize;
     }
 
     /**
@@ -51,8 +66,17 @@ public class PizzaTask {
      * akkor a lilahagymás feltétű pizza NE kerüljön bele a listába.
      */
     public List<Pizza> findPizzasWithTopping(String topping) {
-        // TODO
-        return null;
+        List<Pizza> pizzas = dataHandler.getPizzas();
+        List<Pizza> pizzaByTopping = new ArrayList<>();
+        for (Pizza pizza : pizzas){
+            String[] pizzatops = pizza.getTopping();
+            for (String pizzatop : pizzatops){
+                if (pizzatop.equalsIgnoreCase(topping)){
+                    pizzaByTopping.add(pizza);
+                }
+            }
+        }
+        return pizzaByTopping;
     }
 
 }

@@ -2,6 +2,9 @@ package task4_pizzas;
 
 public enum PizzaSize {
 
-    // TODO
+    SMALL,
+    MEDIUM,
+    LARGE,
+    EXTRA_LARGE
 
 }

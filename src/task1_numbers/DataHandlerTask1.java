@@ -41,6 +41,7 @@ public class DataHandlerTask1 {
             while ((line = br.readLine()) != null) {
                 numbers.add(Integer.parseInt(line));
             }
+            br.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
